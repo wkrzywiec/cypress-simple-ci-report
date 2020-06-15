@@ -13,11 +13,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install a project with a clean slate
-        run: npm ci
-      - run: $(npm bin)/cypress cache path
-      - run: $(npm bin)/cypress cache list
-      - run: $(npm bin)/cypress verify
+        run: |
+          npm ci
+          $(npm bin)/cypress cache path
+          $(npm bin)/cypress cache list
+          $(npm bin)/cypress verify
       - name: Run E2E tests
         run: npm run test:chrome
+        continue-on-error: true
 
 
