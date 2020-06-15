@@ -6,10 +6,10 @@ on:
 
 jobs:
   
-  install:
+  cypress-e2e:
     name: Install all dependencies
     runs-on: ubuntu-18.04
-    container: cypress/base:10
+    container: cypress/browsers:chrome67
     steps:
       - uses: actions/checkout@v2
       - name: Install a project with a clean slate
@@ -17,22 +17,7 @@ jobs:
       - run: $(npm bin)/cypress cache path
       - run: $(npm bin)/cypress cache list
       - run: $(npm bin)/cypress verify
-      - name: Cache dependencies
-        uses: actions/cache@v2
-        with:
-          path: |
-            .npm
-            cache/Cypress
-            node_modules
-          key: ${{ runner.os }}-cypress
-
-  cypress-e2e:
-    name: Run E2E tests on Electron browser
-    runs-on: ubuntu-18.04
-    container: cypress/base:10
-    needs: [install]
-    steps:
-      - uses: actions/checkout@v2
       - name: Run E2E tests
-        run: npm run test
+        run: npm run test:chrome
+
 
