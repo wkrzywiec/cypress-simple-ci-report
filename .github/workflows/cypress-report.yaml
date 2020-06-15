@@ -9,7 +9,7 @@ jobs:
   cypress-e2e:
     name: Run Cypress tests
     runs-on: ubuntu-18.04
-    container: cypress/browsers:base
+    container: cypress/base:10
     steps:
       - uses: actions/checkout@v2
       - name: Install a project with a clean slate
