@@ -1,0 +1,42 @@
+name: Create Cypress report
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  
+  install:
+    name: Install all dependencies
+    container: cypress/base:10
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install a project with a clean slate
+        run: npm ci
+      - run: $(npm bin)/cypress cache path
+      - run: $(npm bin)/cypress cache list
+      - run: $(npm bin)/cypress verify
+      - name: Upload .npm
+        uses: actions/upload-artifact@v2
+        with:
+          path: .npm
+      - name: Upload cache/Cypress
+        uses: actions/upload-artifact@v2
+        with:
+          path: cache/Cypress
+      - name: Upload node_modules
+        uses: actions/upload-artifact@v2
+        with:
+          path: node_modules
+
+  cypress-e2e:
+    name: Run E2E tests on Electron browser
+    container: cypress/base:10
+    needs: [install]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download all artifacts
+        uses: actions/download-artifact@v2
+      - name: Run E2E tests
+        run: npm run test
+

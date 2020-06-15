@@ -1,0 +1,23 @@
+{
+  "name": "cypress-simple-ci-report",
+  "version": "1.0.0",
+  "description": "Simple Cypress project",
+  "main": "index.js",
+  "dependencies": {
+    "cypress": "^4.8.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "cypress run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wkrzywiec/cypress-simple-ci-report.git"
+  },
+  "author": "Wojtek Krzywiec",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wkrzywiec/cypress-simple-ci-report/issues"
+  },
+  "homepage": "https://github.com/wkrzywiec/cypress-simple-ci-report#readme"
+}
