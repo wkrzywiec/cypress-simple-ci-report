@@ -8,6 +8,7 @@ jobs:
   
   install:
     name: Install all dependencies
+    runs-on: ubuntu-18.04
     container: cypress/base:10
     steps:
       - uses: actions/checkout@v2
@@ -31,6 +32,7 @@ jobs:
 
   cypress-e2e:
     name: Run E2E tests on Electron browser
+    runs-on: ubuntu-18.04
     container: cypress/base:10
     needs: [install]
     steps:
