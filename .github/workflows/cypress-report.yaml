@@ -7,9 +7,9 @@ on:
 jobs:
   
   cypress-e2e:
-    name: Run Cypress tests in Chrome 67
+    name: Run Cypress tests
     runs-on: ubuntu-18.04
-    container: cypress/browsers:chrome67
+    container: cypress/browsers:base
     steps:
       - uses: actions/checkout@v2
       - name: Install a project with a clean slate
@@ -19,7 +19,7 @@ jobs:
           $(npm bin)/cypress cache list
           $(npm bin)/cypress verify
       - name: Run E2E tests
-        run: npm run test:chrome
+        run: npm run test
         continue-on-error: true
       - name: Copy test execution videos
         run: |
