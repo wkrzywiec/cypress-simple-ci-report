@@ -21,11 +21,13 @@ jobs:
       - name: Run E2E tests
         run: npm run test:chrome
         continue-on-error: true
-      - name: Copy resulting screenshots & videos
-        run: cp -r cypress/videos public/videos
+      - name: Copy test execution videos
+        run: |
+          mkdir public
+          cp -r cypress/videos public/videos
       - name: Merge test results into one
-        run: npm run report:merge
+        run: mochawesome-merge cypress/results/json/*.json > index.json
       - name: Generate HTML report
-        run: npm run report:generate
+        run: marge index.json --reportDir public --assetsDir public/assets --reportPageTitle index.html
 
 
