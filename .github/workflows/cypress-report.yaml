@@ -26,8 +26,8 @@ jobs:
           mkdir public
           cp -r cypress/videos public/videos
       - name: Merge test results into one
-        run: mochawesome-merge cypress/results/json/*.json > index.json
+        run: npm run report:merge
       - name: Generate HTML report
-        run: marge index.json --reportDir public --assetsDir public/assets --reportPageTitle index.html
+        run: npm run report:generate
 
 
