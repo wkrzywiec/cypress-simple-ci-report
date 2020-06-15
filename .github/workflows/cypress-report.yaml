@@ -17,18 +17,14 @@ jobs:
       - run: $(npm bin)/cypress cache path
       - run: $(npm bin)/cypress cache list
       - run: $(npm bin)/cypress verify
-      - name: Upload .npm
-        uses: actions/upload-artifact@v2
+      - name: Cache dependencies
+        uses: actions/cache@v2
         with:
-          path: .npm
-      - name: Upload cache/Cypress
-        uses: actions/upload-artifact@v2
-        with:
-          path: cache/Cypress
-      - name: Upload node_modules
-        uses: actions/upload-artifact@v2
-        with:
-          path: node_modules
+          path: |
+            .npm
+            cache/Cypress
+            node_modules
+          key: ${{ runner.os }}-cypress
 
   cypress-e2e:
     name: Run E2E tests on Electron browser
@@ -37,8 +33,6 @@ jobs:
     needs: [install]
     steps:
       - uses: actions/checkout@v2
-      - name: Download all artifacts
-        uses: actions/download-artifact@v2
       - name: Run E2E tests
         run: npm run test
 
