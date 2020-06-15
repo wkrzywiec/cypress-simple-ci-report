@@ -19,7 +19,7 @@ jobs:
           $(npm bin)/cypress cache list
           $(npm bin)/cypress verify
       - name: Run E2E tests
-        run: npm run test
+        run: npm run test:chrome
         continue-on-error: true
       - name: Copy test execution videos
         run: |
