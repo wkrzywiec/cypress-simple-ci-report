@@ -1,0 +1,1 @@
+# cypress-simple-ci-report
