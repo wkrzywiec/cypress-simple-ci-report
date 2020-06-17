@@ -4,7 +4,7 @@ on:
     branches:
       - 'master'
   schedule:
-    - crone: '0 0 8 1/1 * ? *'
+    - cron: '0 0 8 1/1 * ? *'
 
 jobs:
   
