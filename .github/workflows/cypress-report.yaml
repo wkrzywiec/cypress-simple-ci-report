@@ -2,7 +2,7 @@ name: Create Cypress report
 on:
   push:
     branches:
-      - 'master' 
+      - 'master'
   # Add this part if you want to schedule test rerun
   # schedule:
   #   - cron: '0 8 1-31 * *'
