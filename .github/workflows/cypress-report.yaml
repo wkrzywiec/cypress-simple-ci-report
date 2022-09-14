@@ -45,3 +45,12 @@ jobs:
           publish_dir: ./public
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
+
+      - name: action-slack
+        uses: 8398a7/action-slack@v2.6.0
+        with:
+          status: ${{job.status}}
+          author_name: <#git>
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # required
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
