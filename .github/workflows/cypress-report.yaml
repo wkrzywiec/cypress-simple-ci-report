@@ -51,8 +51,10 @@ jobs:
         with:
           status: ${{job.status}}
           author_name: <#git>
-          message: https://kyeonghwanlee.github.io/cypress-simple-ci-report/
-          github_base_url: https://kyeonghwanlee.github.io/cypress-simple-ci-report/
+          payload: |
+            {
+            "https://kyeonghwanlee.github.io/cypress-simple-ci-report/"
+            }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # required
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
