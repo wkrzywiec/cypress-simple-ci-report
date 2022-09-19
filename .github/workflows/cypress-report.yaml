@@ -1,11 +1,7 @@
 name: Create Cypress report
+
 on:
-  push:
-    branches:
-      - 'master'
-  # Add this part if you want to schedule test rerun
-  # schedule:
-  #   - cron: '0 8 1-31 * *'
+  workflow_dispatch:
 
 jobs:
   
@@ -47,12 +43,16 @@ jobs:
           user_email: 'github-actions[bot]@users.noreply.github.com'
 
       - name: action-slack
-        uses: slackapi/slack-github-action@v1.22.0
+        uses: 8398a7/action-slack@v2.6.0
         with:
-          channel: '#git'
+          status: ${{job.status}}
+          author_name: <#git>
+          message: https://kyeonghwanlee.github.io/cypress-simple-ci-report/
+          github_base_url: https://kyeonghwanlee.github.io/cypress-simple-ci-report/
           payload: |
             {
             "https://kyeonghwanlee.github.io/cypress-simple-ci-report/"
             }
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # required
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
