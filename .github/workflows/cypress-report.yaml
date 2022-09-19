@@ -43,16 +43,26 @@ jobs:
           user_email: 'github-actions[bot]@users.noreply.github.com'
 
       - name: action-slack
-        uses: 8398a7/action-slack@v2.6.0
+        uses: 8398a7/action-slack@v3
         with:
-          status: ${{job.status}}
-          author_name: <#git>
-          message: https://kyeonghwanlee.github.io/cypress-simple-ci-report/
-          github_base_url: https://kyeonghwanlee.github.io/cypress-simple-ci-report/
-          payload: |
-            {
-            "https://kyeonghwanlee.github.io/cypress-simple-ci-report/"
-            }
+          status: ${{ job.status }}
+          # Field :컨텐트
+          # repo : 창고 이름 및 링크
+          # message : 메시지 및 링크 보내기
+          # commit : 해싱 및 링크 제출
+          # author : 병합된 사람
+          # action : GiitHub Action에 링크된 결과
+          # job : GiitHub Action의 작업 이름 및 링크
+          # job : GiitHub Action의 작업 이름 및 링크
+          # took : 작업 처리 시간
+          # job : GiitHub Action의 작업 이름 및 링크
+          # eventName : GiitHub Actions가 트리거한 이벤트 이름
+          # job : GiitHub Action의 작업 이름 및 링크
+          # ref : Giit의 참조
+          # workflow : 워크플로우 이름 및 링크
+          author_name: cypress-simple-ci-report "https://kyeonghwanlee.github.io/cypress-simple-ci-report/"
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest # selectable (default: repo,message)
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # required
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        if: always() # Pick up events even if the job fails or is canceled.
