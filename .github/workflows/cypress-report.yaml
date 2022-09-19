@@ -49,7 +49,7 @@ jobs:
       - name: action-slack
         uses: slackapi/slack-github-action@v1.22.0
         with:
-          channel: '#devops'
+          channel: '#git'
           payload: |
             {
             "https://kyeonghwanlee.github.io/cypress-simple-ci-report/"
