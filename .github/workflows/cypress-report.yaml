@@ -47,10 +47,9 @@ jobs:
           user_email: 'github-actions[bot]@users.noreply.github.com'
 
       - name: action-slack
-        uses: 8398a7/action-slack@v2.6.0
+        uses: slackapi/slack-github-action@v1.22.0
         with:
-          status: ${{job.status}}
-          author_name: <#git>
+          channel: '#devops'
           payload: |
             {
             "https://kyeonghwanlee.github.io/cypress-simple-ci-report/"
