@@ -12,27 +12,39 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - name: Install a project with a clean slate
-        run: |
-          npm ci
-          $(npm bin)/cypress cache path
-          $(npm bin)/cypress cache list
-          $(npm bin)/cypress verify
+#      - name: Install a project with a clean slate
+#        run: |
+#          npm ci
+#          $(npm bin)/cypress cache path
+#          $(npm bin)/cypress cache list
+#          $(npm bin)/cypress verify
       
-      - name: Run Cypress tests
-        run: npm run test:chrome
-        continue-on-error: true
+#      - name: Run Cypress tests
+#        run: npm run test:chrome
+#        continue-on-error: true
       
-      - name: Copy test execution videos
-        run: |
-          mkdir public
-          cp -r cypress/videos public/videos
+#      - name: Copy test execution videos
+#        run: |
+#          mkdir public
+#          cp -r cypress/videos public/videos
       
-      - name: Merge test results into one
-        run: npm run report:merge
+#      - name: Merge test results into one
+#        run: npm run report:merge
       
-      - name: Generate HTML report
-        run: npm run report:generate
+#      - name: Generate HTML report
+#        run: npm run report:generate
+      - name: Find Jira Issue
+        uses: cybervoid/gajira-get-issue@v1.1
+        id: find
+        with:
+          input-text: ${{ github.head_ref }}
+
+      - name: Update PR body
+        uses: AsasInnab/pr-body-action@v1
+        if: steps.find.outputs.issue != ''
+        with:
+          body: "[${{ steps.find.outputs.issue }}](${{ secrets.JIRA_BASE_URL }}/browse/${{ steps.find.outputs.issue }})\n${{ github.event.pull_request.body }}"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Deploy report page
         uses: peaceiris/actions-gh-pages@v3
