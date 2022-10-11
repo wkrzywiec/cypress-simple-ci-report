@@ -42,19 +42,13 @@ jobs:
       - name: Update PR body
         uses: AsasInnab/pr-body-action@v1
         if: steps.find.outputs.issue != ''
+        id: body
         with:
+          input-text: "[${{ steps.find.outputs.issue }}](${{ secrets.JIRA_BASE_URL }}/browse/${{ steps.find.outputs.issue }})\n${{ github.event.pull_request.body }}"
           body: "[${{ steps.find.outputs.issue }}](${{ secrets.JIRA_BASE_URL }}/browse/${{ steps.find.outputs.issue }})\n${{ github.event.pull_request.body }}"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
-      - name: Deploy report page
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
-          user_name: 'github-actions[bot]'
-          user_email: 'github-actions[bot]@users.noreply.github.com'
 
-      - name: action-slack
+      - name: sction-slack
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
