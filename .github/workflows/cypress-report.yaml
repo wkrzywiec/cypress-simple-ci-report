@@ -2,7 +2,8 @@ name: Create Cypress report
 
 on:
   workflow_dispatch:
-
+  pull_request: 
+    types: [opened]
 jobs:
   
   cypress-e2e-chrome81:
