@@ -69,8 +69,8 @@ jobs:
           # eventName : GiitHub Actions가 트리거한 이벤트 이름
           # ref : Giit의 참조
           # workflow : 워크플로우 이름 및 링크
-          author_name: cypress-simple-ci-report "https://kyeonghwanlee.github.io/cypress-simple-ci-report/"
-          fields: repo,message,commit,author,action,eventName,workflow,pullRequest # selectable (default: repo,message)
+          author_name: "https://futureschole.atlassian.net/browse/${{ steps.find.outputs.issue }}"
+          fields: repo,author,action,eventName,workflow,pullRequest # selectable (default: repo,message)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
